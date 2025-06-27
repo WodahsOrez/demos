@@ -25,7 +25,7 @@ module.exports = {
     createDefaultProgram: false,
     extraFileExtensions: ['.vue'],
   },
-  plugins: ['vue', '@typescript-eslint', 'import','simple-import-sort'],
+  plugins: ['vue', '@typescript-eslint', 'import', 'simple-import-sort'],
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
