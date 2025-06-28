@@ -10,8 +10,12 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    LoadMore: typeof import('./src/components/tree-select/ui/load-more.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SelectedTags: typeof import('./src/components/tree-select/ui/selected-tags.vue')['default']
+    TreeSelect: typeof import('./src/components/tree-select/ui/tree-select.vue')['default']
+    TreeSelectPopup: typeof import('./src/components/tree-select/ui/tree-select-popup.vue')['default']
     VanButton: typeof import('vant/es')['Button']
   }
 }
