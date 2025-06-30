@@ -21,7 +21,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: './tsconfig.*?.json',
+    project: ['./tsconfig.json','./tsconfig.node.json'],
     createDefaultProgram: false,
     extraFileExtensions: ['.vue'],
   },
@@ -138,6 +138,7 @@ module.exports = {
      * @link https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/consistent-type-definitions.md
      */
     '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
+    '@typescript-eslint/no-inferrable-types': 'off',
   },
   globals: { defineOptions: 'readonly' },
 };
