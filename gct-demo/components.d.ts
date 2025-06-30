@@ -17,5 +17,9 @@ declare module '@vue/runtime-core' {
     TreeSelect: typeof import('./src/components/tree-select/ui/tree-select.vue')['default']
     TreeSelectPopup: typeof import('./src/components/tree-select/ui/tree-select-popup.vue')['default']
     VanButton: typeof import('vant/es')['Button']
+    VanIcon: typeof import('vant/es')['Icon']
+    VanLoading: typeof import('vant/es')['Loading']
+    VanSearch: typeof import('vant/es')['Search']
+    VanTag: typeof import('vant/es')['Tag']
   }
 }

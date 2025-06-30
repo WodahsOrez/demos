@@ -24,6 +24,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': '/src',
+      '@mobile': '/src/mobile',
     },
   },
 });
