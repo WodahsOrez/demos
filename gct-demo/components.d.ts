@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     LoadMore: typeof import('./src/components/tree-select/ui/load-more.vue')['default']
+    PureTree: typeof import('./src/components/pure-tree/pure-tree.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SelectedTags: typeof import('./src/components/tree-select/ui/selected-tags.vue')['default']
