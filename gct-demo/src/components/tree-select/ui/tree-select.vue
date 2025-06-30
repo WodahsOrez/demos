@@ -10,10 +10,11 @@
 <script lang="ts" setup name="tree-select">
   import { i18n } from '@mobile/locales/setupI18n';
   import { GctPopup } from '@mobile/utils/popup';
-  import TreeSelectPopup from './tree-select-popup.vue';
-  import { TreeSelectController } from '../hooks/tree-select-controller';
   import { computed, ref, useSlots, watch } from 'vue';
+
+  import { TreeSelectController } from '../hooks/tree-select-controller';
   import { SelectTreeNode } from '../types/tree-select-popup';
+  import TreeSelectPopup from './tree-select-popup.vue';
 
   const { t } = i18n.global;
 

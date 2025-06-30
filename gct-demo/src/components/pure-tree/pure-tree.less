@@ -1,0 +1,31 @@
+.pure-tree {
+  // wrapper 样式
+  .pure-tree__node-wrapper-content {
+    display: flex;
+    padding: 4px 0;
+  }
+
+  .pure-tree__node-wrapper-children {
+    display: none;
+    padding-left: 31px;
+  }
+
+  // 箭头样式
+  .pure-tree__expand-arrow {
+    cursor: pointer;
+    padding: 0 8px;
+  }
+
+  // 节点样式
+  .pure-tree__node {
+    padding-left: 8px;
+    flex-grow: 1;
+  }
+
+  // 节点展开样式
+  .pure-tree__node-wrapper--expanded {
+    > .pure-tree__node-wrapper-children {
+      display: block;
+    }
+  }
+}
