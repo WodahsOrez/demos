@@ -1,24 +1,44 @@
 .pure-tree {
+  // 变量
+  --pure-tree__indent-width: 16px;
+  --pure-tree__node-arrow-indent-width: 16px;
+
+
   // wrapper 样式
   .pure-tree__node-wrapper-content {
     display: flex;
-    padding: 4px 0;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 12px;
+    color: #8f8f8f;
   }
 
   .pure-tree__node-wrapper-children {
     display: none;
-    padding-left: 31px;
+  }
+
+  // 节点缩进
+  .pure-tree__indent{
+    width: calc(var(--pure-tree__node-level) * var(--pure-tree__indent-width));
   }
 
   // 箭头样式
-  .pure-tree__expand-arrow {
+  .pure-tree__node-arrow {
     cursor: pointer;
-    padding: 0 8px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+  }
+
+  .pure-tree__node-arrow-indent{
+    width: var(--pure-tree__node-arrow-indent-width);
   }
 
   // 节点样式
   .pure-tree__node {
-    padding-left: 8px;
+    display: flex;
+    width: 1px;
+    flex-shrink: 1;
     flex-grow: 1;
   }
 
@@ -28,4 +48,13 @@
       display: block;
     }
   }
+
+  // 节点选中的样式
+  .pure-tree__node-wrapper--selected{
+    > .pure-tree__node-wrapper-content{
+      background: #E3EAFC;
+      color: #3168EC;
+    }
+  }
+
 }

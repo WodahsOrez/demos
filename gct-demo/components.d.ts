@@ -9,8 +9,11 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    EbrTree: typeof import('./src/components/ebr-tree/ebr-tree.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     LoadMore: typeof import('./src/components/tree-select/ui/load-more.vue')['default']
+    NodeArrow: typeof import('./src/components/pure-tree/components/node-arrow.vue')['default']
+    NodeTitle: typeof import('./src/components/pure-tree/components/node-title.vue')['default']
     PureTree: typeof import('./src/components/pure-tree/pure-tree.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

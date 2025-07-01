@@ -1,7 +1,8 @@
 import { PropType, SlotsType, defineComponent, renderSlot } from 'vue';
 import './pure-tree.less';
-import { Icon } from 'vant';
 import { PureTreeNode } from './types';
+import NodeArrow from './components/node-arrow.vue';
+import NodeTitle from './components/node-title.vue';
 
 export const PureTree = defineComponent({
   name: 'PureTree',
@@ -12,42 +13,52 @@ export const PureTree = defineComponent({
     },
   },
   emits: {
-    nodeCheckChange: (_checked: boolean, _node: PureTreeNode) => true,
-    nodeExpandChange: (_expanded: boolean, _node: PureTreeNode) => true,
+    nodeClick: (_node: PureTreeNode) => true,
+    nodeArrowClick: (_node: PureTreeNode) => true,
   },
   slots: Object as SlotsType<{
-    nodeLabel: { node: PureTreeNode };
+    node: { node: PureTreeNode };
     nodeArrow: { node: PureTreeNode };
   }>,
   setup(props, { emit, slots }) {
-    const onNodeChecked = (node: PureTreeNode, e: MouseEvent) => {
+    const onNodeClick = (node: PureTreeNode, e: MouseEvent) => {
       e.stopPropagation();
-      /** 是否选中 */
-      const checked = !!node.selected;
-      emit('nodeCheckChange', checked, node);
+      emit('nodeClick', node);
     };
 
-    const onNodeExpanded = (node: PureTreeNode, e: MouseEvent) => {
+    const nodeArrowClick = (node: PureTreeNode, e: MouseEvent) => {
       e.stopPropagation();
-      const expanded = !!node.expanded;
-      emit('nodeExpandChange', expanded, node);
+      emit('nodeArrowClick', node);
+    };
+
+    const renderIndent = (level: number) => {
+      return <span class="pure-tree__indent" style={{ '--pure-tree__node-level': level }} />;
     };
 
     const renderArrow = (node: PureTreeNode) => {
+      /** 是否是父节点 */
+      const isParent = node.children && node.children.length > 0;
+      if (!isParent) {
+        /** 绘制子节点没有箭头时的缩进 */
+        return <div class="pure-tree__node-arrow-indent"></div>;
+      }
       const isExpand = !!node.expanded;
-      const arrow = renderSlot(slots, 'node-arrow', { node }, () => {
-        return [<Icon name={isExpand ? 'arrow-up' : 'arrow-down'} />];
+      const arrow = renderSlot(slots, 'nodeArrow', { node }, () => {
+        return [<NodeArrow expanded={isExpand} />];
       });
       return (
-        <div class="pure-tree__expand-arrow" onClick={(e) => onNodeExpanded(node, e)}>
+        <div class="pure-tree__node-arrow" onClick={(e) => nodeArrowClick(node, e)}>
           {arrow}
         </div>
       );
     };
 
     const renderNode = (node: PureTreeNode) => {
-      const label = renderSlot(slots, 'node-label', { node }, () => [node.name]);
-      return <div class="pure-tree__node">{label}</div>;
+      const label = renderSlot(slots, 'node-label', { node }, () => [
+        <NodeTitle title={node.name} tooltip={node.name} />,
+      ]);
+      const nodeVNode = renderSlot(slots, 'node', { node }, () => [label]);
+      return <div class="pure-tree__node">{nodeVNode}</div>;
     };
 
     const renderNodeWrapper = (node: PureTreeNode, level: number = 0) => {
@@ -62,8 +73,9 @@ export const PureTree = defineComponent({
 
       return (
         <div class={classNames}>
-          <div class="pure-tree__node-wrapper-content" onClick={(e) => onNodeChecked(node, e)}>
-            {isParent && renderArrow(node)}
+          <div class="pure-tree__node-wrapper-content" onClick={(e) => onNodeClick(node, e)}>
+            {renderIndent(level)}
+            {renderArrow(node)}
             {renderNode(node)}
           </div>
           {node.children && node.children.length > 0 && (
